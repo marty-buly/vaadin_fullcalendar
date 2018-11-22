@@ -14,19 +14,30 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package org.vaadin.stefan;
+package org.vaadin.stefan.fullcalendar;
 
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
-import org.vaadin.stefan.fullcalendar.FullCalendar;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.DomEvent;
+import com.vaadin.flow.component.EventData;
+import elemental.json.JsonObject;
 
-@Tag("my-full-calendar")
-@HtmlImport("frontend://my-full-calendar.html")
-//public class MyFullCalendar extends FullCalendarScheduler {
-public class MyFullCalendar extends FullCalendar {
-    MyFullCalendar(int entryLimit) {
-        super(entryLimit);
+import java.time.Instant;
+import java.time.LocalDate;
+
+/**
+ * Occurs when the current set of dates / shown time interval has been rendered. Provides information about the shown timespan.
+ */
+@DomEvent("datesRender")
+public class DatesRenderedEvent extends ViewRenderedEvent {
+
+    /**
+     * Creates a new event using the given source and indicator whether the
+     * event originated from the client side or the server side.
+     *
+     * @param source     the source component
+     * @param fromClient <code>true</code> if the event originated from the client
+     */
+    public DatesRenderedEvent(FullCalendar source, boolean fromClient, @EventData("event.detail") JsonObject eventData) {
+        super(source, fromClient, eventData);
     }
-
-
 }

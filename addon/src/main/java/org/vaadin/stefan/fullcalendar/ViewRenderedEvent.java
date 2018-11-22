@@ -24,10 +24,9 @@ import elemental.json.JsonObject;
 import java.time.LocalDate;
 
 /**
- * Occurs when the calendar view has been rendered. Provides information about the shown timespan.
+ * Occurs on a view rendered sub event. Provides information about the shown timespan.
  */
-@DomEvent("viewRender")
-public class ViewRenderedEvent extends ComponentEvent<FullCalendar> {
+public abstract class ViewRenderedEvent extends ComponentEvent<FullCalendar> {
 
     private final LocalDate intervalStart;
     private final LocalDate intervalEnd;
@@ -44,10 +43,14 @@ public class ViewRenderedEvent extends ComponentEvent<FullCalendar> {
     public ViewRenderedEvent(FullCalendar source, boolean fromClient, @EventData("event.detail") JsonObject eventData) {
         super(source, fromClient);
 
-        intervalStart = LocalDate.parse(eventData.getString("intervalStart"));
-        intervalEnd = LocalDate.parse(eventData.getString("intervalEnd"));
-        start = LocalDate.parse(eventData.getString("start"));
-        end = LocalDate.parse(eventData.getString("end"));
+        intervalStart = parseDate(eventData, "intervalStart");
+        intervalEnd = parseDate(eventData, "intervalEnd");
+        start = parseDate(eventData, "start");
+        end = parseDate(eventData, "end");
+    }
+
+    protected LocalDate parseDate(@EventData("event.detail") JsonObject eventData, String intervalStart) {
+        return Timezone.UTC.converToLocalDateTime(JsonUtils.parseDateTimeString(eventData.getString(intervalStart), Timezone.UTC)).toLocalDate();
     }
 
     /**

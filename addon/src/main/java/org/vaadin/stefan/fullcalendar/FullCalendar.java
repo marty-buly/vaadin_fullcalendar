@@ -809,15 +809,27 @@ public class FullCalendar extends PolymerTemplate<TemplateModel> implements HasS
     }
 
     /**
-     * Registers a listener to be informed when a view rendered event occurred.
+     * Registers a listener to be informed when a dates rendered event occurred.
      *
      * @param listener listener
      * @return registration to remove the listener
      * @throws NullPointerException when null is passed
      */
-    public Registration addViewRenderedListener(@Nonnull ComponentEventListener<ViewRenderedEvent> listener) {
+    public Registration addDatesRenderedListener(@Nonnull ComponentEventListener<DatesRenderedEvent> listener) {
         Objects.requireNonNull(listener);
-        return addListener(ViewRenderedEvent.class, listener);
+        return addListener(DatesRenderedEvent.class, listener);
+    }
+
+    /**
+     * Registers a listener to be informed when a view skeleton rendered event occurred.
+     *
+     * @param listener listener
+     * @return registration to remove the listener
+     * @throws NullPointerException when null is passed
+     */
+    public Registration addViewSkeletonRenderedListener(@Nonnull ComponentEventListener<ViewSkeletonRenderedEvent> listener) {
+        Objects.requireNonNull(listener);
+        return addListener(ViewSkeletonRenderedEvent.class, listener);
     }
 
     /**
