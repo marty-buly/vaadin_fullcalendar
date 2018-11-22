@@ -254,7 +254,7 @@ public class Demo extends Div {
 
             Notification.show(text);
         });
-        calendar.addViewRenderedListener(event -> updateIntervalLabel(buttonDatePicker, comboBoxView.getValue(), event.getIntervalStart()));
+        calendar.addDatesRenderedListener(event -> updateIntervalLabel(buttonDatePicker, comboBoxView.getValue(), event.getIntervalStart()));
 
         calendar.addTimeslotsSelectedListener(event -> {
             Entry entry = new Entry();
