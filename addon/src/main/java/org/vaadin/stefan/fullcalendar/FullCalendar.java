@@ -907,7 +907,7 @@ public class FullCalendar extends PolymerTemplate<TemplateModel> implements HasS
         NOW_INDICATOR("nowIndicator"),
         NAV_LINKS("navLinks"),
         BUSINESS_HOURS("businessHours"),
-        TIMEZONE("timezone"),
+        TIMEZONE("timeZone"),
         ;
 
         private final String optionKey;

@@ -36,6 +36,6 @@ public class EntryDroppedEvent extends EntryTimeChangedEvent {
      * @param jsonDelta json object with delta information
      */
     public EntryDroppedEvent(FullCalendar source, boolean fromClient, @EventData("event.detail.data") JsonObject jsonEntry, @EventData("event.detail.delta") JsonObject jsonDelta) {
-        super(source, fromClient, jsonEntry, jsonDelta);
+        super(source, fromClient, jsonEntry, jsonDelta, jsonDelta);
     }
 }

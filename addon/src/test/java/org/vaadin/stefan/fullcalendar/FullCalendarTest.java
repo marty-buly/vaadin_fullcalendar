@@ -772,7 +772,7 @@ public class FullCalendarTest {
             Day event
          */
         T event = constructor.newInstance(calendar, true, jsonModifiedAllDayEntry, jsonDelta);
-        Assertions.assertEquals(delta, event.getDelta());
+        Assertions.assertEquals(delta, event.getStartDelta());
 
         // not changed automatically
         EntryTest.assertFullEqualsByJsonAttributes(allDayEntry, event.getEntry());
@@ -786,7 +786,7 @@ public class FullCalendarTest {
          */
         event = constructor.newInstance(calendar, true, jsonModifiedTimedEntry, jsonDelta);
 
-        Assertions.assertEquals(delta, event.getDelta());
+        Assertions.assertEquals(delta, event.getStartDelta());
 
         // not changed automatically
         EntryTest.assertFullEqualsByJsonAttributes(timedEntry, event.getEntry());

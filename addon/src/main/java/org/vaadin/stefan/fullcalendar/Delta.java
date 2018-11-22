@@ -62,7 +62,7 @@ public class Delta {
     }
 
     private static int toInt(JsonObject delta, String key) {
-        return (int) delta.getNumber(key);
+        return delta.hasKey(key) ? (int) delta.getNumber(key) : 0;
     }
 
     public int getYears() {

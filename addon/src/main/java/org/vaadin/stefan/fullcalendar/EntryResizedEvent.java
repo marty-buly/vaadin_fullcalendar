@@ -33,10 +33,11 @@ public class EntryResizedEvent extends EntryTimeChangedEvent {
      * @param source source component
      * @param fromClient is from client
      * @param jsonEntry json object with changed data
-     * @param jsonDelta json object with delta information
+     * @param jsonStartDelta json object with start delta information
+     * @param jsonEndDelta json object with end delta information
      */
-    public EntryResizedEvent(FullCalendar source, boolean fromClient, @EventData("event.detail.data") JsonObject jsonEntry, @EventData("event.detail.delta") JsonObject jsonDelta) {
-        super(source, fromClient, jsonEntry, jsonDelta);
+    public EntryResizedEvent(FullCalendar source, boolean fromClient, @EventData("event.detail.data") JsonObject jsonEntry, @EventData("event.detail.startDelta") JsonObject jsonStartDelta, @EventData("event.detail.endDelta") JsonObject jsonEndDelta) {
+        super(source, fromClient, jsonEntry, jsonStartDelta, jsonEndDelta);
 
 //        Entry entry = getEntry();
 //        entry.setEnd(getDelta().applyOn(entry.getEnd()));

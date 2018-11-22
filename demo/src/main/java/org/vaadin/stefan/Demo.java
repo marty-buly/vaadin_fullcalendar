@@ -236,7 +236,7 @@ public class Demo extends Div {
 
             Entry entry = event.getEntry();
 
-            Notification.show(entry.getTitle() + " resized to " + entry.getStart() + " - " + entry.getEnd() + " " + calendar.getTimezone().getClientSideValue() + " by " + event.getDelta());
+            Notification.show(entry.getTitle() + " resized to " + entry.getStart() + " - " + entry.getEnd() + " " + calendar.getTimezone().getClientSideValue() + " by " + event.getStartDelta());
         });
         calendar.addEntryDroppedListener(event -> {
             event.applyChangesOnEntry();
@@ -245,7 +245,7 @@ public class Demo extends Div {
             LocalDateTime start = entry.getStart();
             LocalDateTime end = entry.getEnd();
 
-            String text = entry.getTitle() + " moved to " + start + " - " + end + " " + calendar.getTimezone().getClientSideValue()+ " by " + event.getDelta();
+            String text = entry.getTitle() + " moved to " + start + " - " + end + " " + calendar.getTimezone().getClientSideValue()+ " by " + event.getStartDelta();
 
             if(entry instanceof ResourceEntry) {
                 Set<Resource> resources = ((ResourceEntry) entry).getResources();

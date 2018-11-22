@@ -24,26 +24,38 @@ import elemental.json.JsonObject;
  * information about the start time. The end time might have changed independently given by the client.
  */
 public class EntryTimeChangedEvent extends EntryChangedEvent {
-    private final Delta delta;
+    private final Delta startDelta;
+    private final Delta endDelta;
 
     /**
      * New instance. Awaits the changed data object for the entry plus the json object for the delta information.
      * @param source source component
      * @param fromClient is from client
      * @param jsonEntry json object with changed data
-     * @param jsonDelta json object with delta information
+     * @param jsonStartDelta json object with start delta information
+     * @param jsonEndDelta json object with end delta information
      */
-    public EntryTimeChangedEvent(FullCalendar source, boolean fromClient, JsonObject jsonEntry, JsonObject jsonDelta) {
+    public EntryTimeChangedEvent(FullCalendar source, boolean fromClient, JsonObject jsonEntry, JsonObject jsonStartDelta, JsonObject jsonEndDelta) {
         super(source, fromClient, jsonEntry);
-        this.delta = Delta.fromJson(jsonDelta);
+        this.startDelta = Delta.fromJson(jsonStartDelta);
+        this.endDelta = Delta.fromJson(jsonEndDelta);
     }
 
     /**
-     * Returns the delta information. Please note, that the entry itself already is up-to-date, so there is no need
+     * Returns the start delta information. Please note, that the entry itself already is up-to-date, so there is no need
      * to apply the delta on it.
-     * @return delta
+     * @return delta of start
      */
-    public Delta getDelta() {
-        return delta;
+    public Delta getStartDelta() {
+        return startDelta;
+    }
+
+    /**
+     * Returns the end delta information. Please note, that the entry itself already is up-to-date, so there is no need
+     * to apply the delta on it.
+     * @return delta of end
+     */
+    public Delta getEndDelta() {
+        return endDelta;
     }
 }

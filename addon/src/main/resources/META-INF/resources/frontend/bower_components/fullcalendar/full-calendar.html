@@ -1305,50 +1305,13 @@
                     this._calendar.render();
 
 
-                    // try {
-                    //     thisReference.$server.setBrowserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
-                    // } catch (e) {
-                    //     console.log("Could not obtain browsers time zone", e);
-                    // }
+                    try {
+                        this.$server.setBrowserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+                    } catch (e) {
+                        console.log("Could not obtain browsers time zone", e);
+                    }
 
-                    // this._calendar.on('dayClick', function (date) {
-                    //     thisReference.dispatchEvent(new CustomEvent('dayClick', {
-                    //         detail: {
-                    //             date: date.toISOString(),
-                    //             allDay: !date.hasTime()
-                    //         }
-                    //     }));
-                    // });
-                    //
-                    // this._calendar.on('select', function (start, end) {
-                    //     thisReference.dispatchEvent(new CustomEvent('select', {
-                    //         detail: {
-                    //             start: start.toISOString(),
-                    //             end: end.toISOString(),
-                    //             allDay: !start.hasTime()
-                    //         }
-                    //     }));
-                    // });
-                    //
-                    //
-                    // this._calendar.on('eventResize', function (event, delta, revertFunc) {
-                    //     thisReference.dispatchEvent(new CustomEvent('eventResize', {
-                    //         detail: {
-                    //             data: thisReference._toEventData(event),
-                    //             delta: delta._data
-                    //         }
-                    //     }));
-                    // });
-                    //
-                    // this._calendar.on('eventDrop', function (event, delta, revertFunc) {
-                    //     thisReference.dispatchEvent(new CustomEvent('eventDrop', {
-                    //         detail: {
-                    //             data: thisReference._toEventData(event),
-                    //             delta: delta._data
-                    //         }
-                    //     }));
-                    // });
-                    //
+
                 }
             }
 
@@ -1404,6 +1367,45 @@
                         }));
                     },
 
+                    dayClick: function (dateClickInfo) {
+                        thisReference.dispatchEvent(new CustomEvent('dayClick', {
+                            detail: {
+                                date: dateClickInfo.dateStr,
+                                allDay: dateClickInfo.allDay
+                            }
+                        }));
+                    },
+
+                    select: function (selectionInfo) {
+                        thisReference.dispatchEvent(new CustomEvent('select', {
+                            detail: {
+                                start: selectionInfo.startStr,
+                                end: selectionInfo.endStr,
+                                allDay: selectionInfo.allDay
+                            }
+                        }));
+                    },
+
+                    eventDrop: function (eventDropInfo) {
+                        thisReference.dispatchEvent(new CustomEvent('eventDrop', {
+                            detail: {
+                                data: thisReference._toEventData(eventDropInfo.event),
+                                delta: eventDropInfo.delta
+                            }
+                        }));
+                    },
+
+                    eventResize: function (eventResizeInfo) {
+                        thisReference.dispatchEvent(new CustomEvent('eventResize', {
+                            detail: {
+                                data: thisReference._toEventData(eventResizeInfo.event),
+                                startDelta: eventResizeInfo.startDelta,
+                                endDelta: eventResizeInfo.endDelta,
+                            }
+                        }));
+                    },
+
+
                     timeZone: 'UTC',
 
                     // // no native control elements
@@ -1441,23 +1443,23 @@
                 }
 
                 calendar.setOption(key, value);
-
             }
 
             _toEventData(event) {
-                var end = event.end;
-                if (end != null) {
-                    end = end.toISOString();
-                } else if (event.allDay) {
-                    end = event.start.clone().add(1, 'day').toISOString(); // update, when default duration change
-                } else {
-                    end = event.start.clone().add(1, 'hour').toISOString(); // update, when default duration change
-                }
-
+                // var end = event.end;
+                // if (end != null) {
+                //     end = end.toISOString();
+                // } else if (event.allDay) {
+                //     end = event.start.clone().add(1, 'day').toISOString(); // update, when default duration change
+                // } else {
+                //     end = event.start.clone().add(1, 'hour').toISOString(); // update, when default duration change
+                // }
+                //
                 return {
                     id: event.id,
                     start: event.start.toISOString(),
-                    end: end,
+                    end: event.end.toISOString(),
+                    // end: end,
                     allDay: event.allDay,
                     editable: event.editable
                 }
