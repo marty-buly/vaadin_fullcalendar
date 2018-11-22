@@ -2,6 +2,7 @@ package org.vaadin.stefan.fullcalendar;
 
 import com.vaadin.flow.function.DeploymentConfiguration;
 import com.vaadin.flow.server.VaadinService;
+import org.junit.jupiter.api.Disabled;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
@@ -9,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@Disabled // not yet working
 public class TestUtils {
 
     private static boolean inited = false;
