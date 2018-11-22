@@ -60,6 +60,7 @@ public class Demo extends Div {
     private Button buttonDatePicker;
     private Div toolbar;
     private ComboBox<Timezone> timezoneComboBox;
+    private ComboBox<GroupEntriesBy> comboBoxGroupBy;
 
     public Demo() {
         VaadinSession.getCurrent().setErrorHandler(event -> event.getThrowable().printStackTrace());
@@ -116,7 +117,7 @@ public class Demo extends Div {
         comboBoxLocales.setRequired(true);
         comboBoxLocales.setPreventInvalidInput(true);
 
-        ComboBox<GroupEntriesBy> comboBoxGroupBy = new ComboBox<>("");
+        comboBoxGroupBy = new ComboBox<>("");
         comboBoxGroupBy.setPlaceholder("Group by...");
         comboBoxGroupBy.setItems(GroupEntriesBy.values());
         comboBoxGroupBy.setItemLabelGenerator(item -> {
@@ -209,6 +210,8 @@ public class Demo extends Div {
         // scheduler options
         if (calendar instanceof Scheduler) {
             ((Scheduler) calendar).setSchedulerLicenseKey(Scheduler.GPL_V3_LICENSE_KEY);
+        } else {
+            comboBoxGroupBy.setVisible(false);
         }
 
         // This event listener is deactivated to prevent conflicts with selected event listener, who is also called on a
@@ -298,11 +301,11 @@ public class Demo extends Div {
         });
 
         calendar.addDayNumberClickedListener(event -> {
-            comboBoxView.setValue(CalendarViewImpl.LIST_DAY);
+            comboBoxView.setValue(CalendarViewImpl.AGENDA_DAY);
             calendar.gotoDate(event.getDateTime().toLocalDate());
         });
         calendar.addWeekNumberClickedListener(event -> {
-            comboBoxView.setValue(CalendarViewImpl.LIST_WEEK);
+            comboBoxView.setValue(CalendarViewImpl.AGENDA_WEEK);
             calendar.gotoDate(event.getDateTime().toLocalDate());
         });
 
