@@ -1386,26 +1386,26 @@
                         }));
                     },
 
+                    navLinkDayClick: function (date) {
+                        thisReference.dispatchEvent(new CustomEvent("navLinkDayClick", {
+                            detail: {
+                                date: date.toISOString(),
+                                allDay: true
+                            }
+                        }));
+                    },
+
+                    navLinkWeekClick: function (date) {
+                        thisReference.dispatchEvent(new CustomEvent("navLinkWeekClick", {
+                            detail: {
+                                date: date.toISOString(),
+                                allDay: true
+                            }
+                        }));
+                    },
+
                     timeZone: 'UTC',
-                    //
-                    // navLinkDayClick: function (date) {
-                    //     thisReference.dispatchEvent(new CustomEvent("navLinkDayClick", {
-                    //         detail: {
-                    //             date: date.toISOString(),
-                    //             allDay: true
-                    //         }
-                    //     }));
-                    // },
-                    //
-                    // navLinkWeekClick: function (date) {
-                    //     thisReference.dispatchEvent(new CustomEvent("navLinkWeekClick", {
-                    //         detail: {
-                    //             date: date.toISOString(),
-                    //             allDay: true
-                    //         }
-                    //     }));
-                    // },
-                    //
+
                     // // no native control elements
                     header: {
                         left: '',
